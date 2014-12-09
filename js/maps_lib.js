@@ -90,6 +90,7 @@ var MapsLib = {
     MapsLib.clearSearch();
     var address = $("#search_address").val();
     MapsLib.searchRadius = $("#search_radius").val();
+ /*   
     if ($("#select_type").val() === 1) {
       new google.maps.FusionTablesLayer(fusionTableId1);
     } else if ($("#select_type").val() === 2) {
@@ -103,7 +104,7 @@ var MapsLib = {
     } else {
       new google.maps.FusionTablesLayer(fusionTableId1);
     }
-
+*/
     var whereClause = MapsLib.locationColumn + " not equal to ''";
 
     //-----custom filters-------
