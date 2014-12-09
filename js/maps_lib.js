@@ -22,7 +22,7 @@ var MapsLib = {
   //the encrypted Table ID of your Fusion Table (found under File => About) NC
   //NOTE: numeric IDs will be deprecated soon
 
-  fusionTableId1: "14WQ9niyXF5NXClrBqU5gvQTs5jHSLDL4U17egdcE", // JT Google Drive = GA
+  fusionTableId: "14WQ9niyXF5NXClrBqU5gvQTs5jHSLDL4U17egdcE", // JT Google Drive = GA
   fusionTableId2: "1uIY6mH650Bp3b1oyCPAzhG9GtI1NVpp3aRJebwet", // CT
   fusionTableId3: "1XZQWA8bVEVmj6c3k0fI7GBV9r6QyKH8Zbhr04TZ0", // CO
   fusionTableId4: "1AgCKZRm6rO_xNxWzo-mSvhnPp3CeZQwYlOJU1-ma", // FL
