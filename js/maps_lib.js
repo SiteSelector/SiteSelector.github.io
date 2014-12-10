@@ -177,7 +177,7 @@ var MapsLib = {
         where:  whereClause
       },
       styleId: 2,
-      templateId: 2
+      templateId: 3
     } else if ($("#select_type").val === 2) {
      query: {
         from:   MapsLib.fusionTableId2,
@@ -217,7 +217,7 @@ var MapsLib = {
         where:  whereClause
       },
       styleId: 2,
-      templateId: 2
+      templateId: 3
     }
     );
     MapsLib.searchrecords.setMap(map);
