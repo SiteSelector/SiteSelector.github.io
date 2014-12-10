@@ -23,11 +23,11 @@ var MapsLib = {
   //NOTE: numeric IDs will be deprecated soon
 
   fusionTableId: "14WQ9niyXF5NXClrBqU5gvQTs5jHSLDL4U17egdcE", // JT Google Drive = GA
-  fusionTableId2: "1uIY6mH650Bp3b1oyCPAzhG9GtI1NVpp3aRJebwet", // CT
+  /* fusionTableId2: "1uIY6mH650Bp3b1oyCPAzhG9GtI1NVpp3aRJebwet", // CT
   fusionTableId3: "1XZQWA8bVEVmj6c3k0fI7GBV9r6QyKH8Zbhr04TZ0", // CO
   fusionTableId4: "1AgCKZRm6rO_xNxWzo-mSvhnPp3CeZQwYlOJU1-ma", // FL
   fusionTableId5: "1t0OoRDZTOLLvoZBYOtOfC920qzUqn7Y-61WYURak", // NC
-
+*/
   //*New Fusion Tables Requirement* API key. found at https://code.google.com/apis/console/
   //*Important* this key is for demonstration purposes. please register your own.
   googleApiKey:       "AIzaSyA3FQFrNr5W2OEVmuENqhb2MBB2JabdaOY", // Project API using Brittany Adams account
@@ -90,7 +90,7 @@ var MapsLib = {
     MapsLib.clearSearch();
     var address = $("#search_address").val();
     MapsLib.searchRadius = $("#search_radius").val();
-    
+    /*
     if ($("#select_type").val() === 1) {
       new google.maps.FusionTablesLayer(fusionTableId);
     } else if ($("#select_type").val() === 2) {
@@ -104,7 +104,7 @@ var MapsLib = {
     } else {
       new google.maps.FusionTablesLayer(fusionTableId1);
     }
-
+*/
     var whereClause = MapsLib.locationColumn + " not equal to ''";
 
     //-----custom filters-------
