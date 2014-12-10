@@ -90,9 +90,9 @@ var MapsLib = {
     MapsLib.clearSearch();
     var address = $("#search_address").val();
     MapsLib.searchRadius = $("#search_radius").val();
- /*   
+    
     if ($("#select_type").val() === 1) {
-      new google.maps.FusionTablesLayer(fusionTableId1);
+      new google.maps.FusionTablesLayer(fusionTableId);
     } else if ($("#select_type").val() === 2) {
       new google.maps.FusionTablesLayer(fusionTableId2);
     } else if ($("select_type").val() === 3) {
@@ -104,7 +104,7 @@ var MapsLib = {
     } else {
       new google.maps.FusionTablesLayer(fusionTableId1);
     }
-*/
+
     var whereClause = MapsLib.locationColumn + " not equal to ''";
 
     //-----custom filters-------
@@ -170,6 +170,7 @@ var MapsLib = {
     //for more details, see https://developers.google.com/fusiontables/docs/v1/using#WorkingStyles
 
     MapsLib.searchrecords = new google.maps.FusionTablesLayer({
+     if ($("#select_type").val() === 1) { 
       query: {
         from:   MapsLib.fusionTableId,
         select: MapsLib.locationColumn,
@@ -177,7 +178,48 @@ var MapsLib = {
       },
       styleId: 2,
       templateId: 2
-    });
+    } else if ($("#select_type").val === 2) {
+     query: {
+        from:   MapsLib.fusionTableId2,
+        select: MapsLib.locationColumn,
+        where:  whereClause
+      },
+      styleId: 2,
+      templateId: 2
+    } else if ($('#select_type').val === 3) {
+    query: {
+        from:   MapsLib.fusionTableId3,
+        select: MapsLib.locationColumn,
+        where:  whereClause
+      },
+      styleId: 2,
+      templateId: 2 
+    } else if ($('select_type').vale === 4) {
+     query: {
+        from:   MapsLib.fusionTableId4,
+        select: MapsLib.locationColumn,
+        where:  whereClause
+      },
+      styleId: 2,
+      templateId: 2
+    } else if ($'select_type').val ===5) {
+     query: {
+        from:   MapsLib.fusionTableId,
+        select: MapsLib.locationColumn,
+        where:  whereClause
+      },
+      styleId: 2,
+      templateId: 2
+    } else {
+     query: {
+        from:   MapsLib.fusionTableId,
+        select: MapsLib.locationColumn,
+        where:  whereClause
+      },
+      styleId: 2,
+      templateId: 2
+    }
+    );
     MapsLib.searchrecords.setMap(map);
     MapsLib.getCount(whereClause);
   },
