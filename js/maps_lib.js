@@ -111,7 +111,7 @@ var MapsLib = {
     MapsLib.CO_income.setMap(map);
     //run default search
     MapsLib.doSearch();
-  },
+  
     
     //-------end of custom filters--------
 
