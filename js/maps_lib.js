@@ -21,7 +21,15 @@ var MapsLib = {
 
   //the encrypted Table ID of your Fusion Table (found under File => About) Georgia_data
   //NOTE: numeric IDs will be deprecated soon
-  fusionTableId:      "1dwwnydtT8v7uxvVz8DeAOOWp7wwTnDdaPDpkwBh3",
+  fusionTableId:      "1vbDuzNZVQgY2ytfMwb_vCpOajowZ3uA2CgspNjBD", // My Salon Suite locations
+
+  CO_incomeTableId: "1XFJgMbP3SKzS8mNw8etuxm0SfiJvcjLHPOVSSARH", // poly 
+  CO_populationTableId: "1XZQWA8bVEVmj6c3k0fI7GBV9r6QyKH8Zbhr04TZ0", // poly  
+  GA_incomeTableId: "1dwwnydtT8v7uxvVz8DeAOOWp7wwTnDdaPDpkwBh3", // poly 
+  GA_populationId: "1Ht4YPHpWaIpu20jN5UCGxehuulYbNn3SVp-Nu9DW", // poly
+  
+ GA_cosmetId: "1AuyVdY_rS6HEne21Kp84t-9Krro95cochqAsj1XU",
+    
 
   //*New Fusion Tables Requirement* API key. found at https://code.google.com/apis/console/
   //*Important* this has been updated with API for site_selector project (Brittany Adams)
@@ -30,12 +38,12 @@ var MapsLib = {
   //name of the location column in your Fusion Table.
   //NOTE: if your location column name has spaces in it, surround it with single quotes
   //example: locationColumn:     "'my location'",
-  locationColumn:     "geometry",
+  locationColumn:     "Location",
 
   map_centroid:       new google.maps.LatLng(33.7489954, -84.3879824), //center that your map defaults to
   locationScope:      "georgia",      //geographical area appended to all address searches
-  recordName:         "result",       //for showing number of results
-  recordNamePlural:   "results",
+  recordName:         "Address",       //for showing number of results
+  recordNamePlural:   "Addresses",
 
   searchRadius:       805,            //in meters ~ 1/2 mile
   defaultZoom:        11,             //zoom level when map is loaded (bigger is more zoomed in)
@@ -88,7 +96,21 @@ var MapsLib = {
     var whereClause = MapsLib.locationColumn + " not equal to ''";
 
     //-----custom filters-------
-
+  MapsLib.CO_income = new google.maps.FusionTablesLayer({
+  query: {from:  MapsLib.CO_incomeTableId, select: "geometry"}
+});
+  MapsLib.CO_population = new google.maps.FusionTables({
+    query: {from: MapsLib.CO_populationTableId, select: "geometry"}
+  });
+  MapsLib.GA_income = new google.maps.FusionTablesLayer({
+    query: {from: MapsLib.GA_incomeTableId, select: "geometry"}
+  });
+  MapsLib.GA_population = new google.maps.FusionTablesLayer({
+    query: {from: MapsLib.GA_populationTableId, select: "geometry"}
+  });  
+    MapsLib.CO_income.setMap(map);
+    //run default search
+    
     //-------end of custom filters--------
 
     if (address != "") {
@@ -160,6 +182,7 @@ var MapsLib = {
     });
     MapsLib.searchrecords.setMap(map);
     MapsLib.getCount(whereClause);
+    Maps.Lib.getList(whereClause); 
   },
 
   clearSearch: function() {
@@ -257,7 +280,7 @@ var MapsLib = {
 
   handleError: function(json) {
     if (json["error"] != undefined) {
-      var error = json["error"]["errors"]
+      var error = json["error"]["errors"];
       console.log("Error in Fusion Table call!");
       for (var row in error) {
         console.log(" Domain: " + error[row]["domain"]);
@@ -278,6 +301,7 @@ var MapsLib = {
   },
 
   displaySearchCount: function(json) {
+    
     MapsLib.handleError(json);
     var numRows = 0;
     if (json["rows"] != null)
@@ -292,6 +316,66 @@ var MapsLib = {
     $( "#result_box" ).fadeIn();
   },
 
+getList: function(whereClause) {
+    var selectColumns = 'name, address, hours, recyclables ';
+
+    MapsLib.query({ 
+      select: selectColumns, 
+      where: whereClause 
+    }, function(response) { 
+      MapsLib.displayList(response);
+    });
+  },
+
+  displayList: function(json) {
+    MapsLib.handleError(json);
+    console.log(json);
+    var data = json['rows'];
+    var template = '';
+
+    var results = $('#results_list');
+    results.hide().empty(); //hide the existing list and empty it out first
+
+    if (data == null) {
+      //clear results list
+      results.append("<li><span class='lead'>No results found</span></li>");
+    }
+    else {
+      for (var row in data) {
+        template = "\
+          <div class='row-fluid item-list'>\
+            <div class='span12'>\
+              <strong>" + data[row][0] + "</strong>\
+              <br />\
+              " + data[row][1] + "\
+              <br />\
+              " + data[row][2] + "\
+              <br />\
+              " + data[row][3] + "\
+            </div>\
+          </div>";
+        results.append(template);
+      }
+    }
+    results.fadeIn();
+  },  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   addCommas: function(nStr) {
     nStr += '';
     x = nStr.split('.');
@@ -313,6 +397,8 @@ var MapsLib = {
   convertToPlainString: function(text) {
     if (text == undefined) return '';
   	return decodeURIComponent(text);
+ 
+   
   }
   
   //-----custom functions-------
@@ -320,4 +406,4 @@ var MapsLib = {
   // This also applies to the convertToPlainString function above
   
   //-----end of custom functions-------
-}
+};
