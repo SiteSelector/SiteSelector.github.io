@@ -41,9 +41,9 @@ var MapsLib = {
   locationColumn:     col6,
 
   map_centroid:       new google.maps.LatLng(33.7489954, -84.3879824), //center that your map defaults to
-  locationScope:      "georgia",      //geographical area appended to all address searches
-  recordName:         "Address",       //for showing number of results
-  recordNamePlural:   "Addresses",
+  locationScope:      "US",      //geographical area appended to all address searches
+  recordName:         "Location",       //for showing number of results
+  recordNamePlural:   "Locations",
 
   searchRadius:       805,            //in meters ~ 1/2 mile
   defaultZoom:        11,             //zoom level when map is loaded (bigger is more zoomed in)
